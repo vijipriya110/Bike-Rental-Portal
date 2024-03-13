@@ -131,13 +131,12 @@ try {
 })
 
 //to calculate the hours
-router.get("/hours/:id", async(req,res)=>{
+router.post("/hours/:id", async(req,res)=>{
     try {
         const product = await Product.findOne({_id:req.params.id})
-        const startTime = new Date(req.body.startTime)
-        console.log(startTime)
-        const endTime = new Date(req.body.endTime)
-        const totalHours = (endTime-startTime)/(1000*3600)
+        const date1 = new Date(req.body.startTime)
+        const date2 = new Date(req.body.endTime)
+        const totalHours = (date2-date1)/(1000*3600)
          res.status(200).json({message:"Get Total hours sucessfully", totalHours})
 
     } catch (error) {
@@ -145,5 +144,7 @@ router.get("/hours/:id", async(req,res)=>{
         return res.status(500).json({message:"Internal server error"})
     }
 })
+
+
 
 export const productRouter = router
