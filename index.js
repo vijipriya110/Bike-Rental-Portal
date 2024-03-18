@@ -5,6 +5,7 @@ import cors from "cors";
 import { userRouter } from "./Routes/user.js";
 import { productRouter } from "./Routes/product.js";
 import { isAuthenticted } from "./Controller/auth.js";
+import { orderRouter } from "./Routes/order.js";
 
 
 
@@ -27,6 +28,7 @@ dbConnection()
 //routes
 app.use("/bike", userRouter)
 app.use("/bike",isAuthenticted, productRouter)
+app.use("/bike", orderRouter)
 
 
 //server listner
