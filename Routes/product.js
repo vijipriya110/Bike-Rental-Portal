@@ -55,21 +55,7 @@ router.get("/all-product", async(req,res)=>{
     }
 })
 
-//to get which user post the product
-router.get("/user", async(req, res)=>{
-    try {
-        const products = await Product.find({user:req.user._id}).populate("user", "username");
-        if(!products){
-            return res.status(400).json({message:"Could not found any info"})
-        }
-        return res.status(200).json({message:"Sucessfuly got product owner details",products})
 
-
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({message:"Internal server error"})
-    }
-})
 //get single product
 router.get("/product/:id",async(req, res)=>{
     try {
@@ -118,17 +104,7 @@ router.delete("/product/delete/:id", async(req, res)=>{
         return res.status(500).json({message:"Internal server error"})
     }
 })
-//to count the product
-router.get("/product-count", async(req, res)=>{
-try {
-    const total = await Product.find({}).estimatedDocumentCount();
-    res.status(200).json({message:"Get Total count sucessfully", total})
-} catch (error) {
-    console.log(error)
-    return res.status(500).json({message:"Internal server error"})
 
-}
-})
 
 //to calculate the hours
 router.post("/hours/:id", async(req,res)=>{
